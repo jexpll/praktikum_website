@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Kalkulator</title>
+</head>
+
+<body>
+    <h1>Kalkulator</h1>
+
+    <label for="angka1">Angka Pertama:</label>
+    <input type="number" id="angka1">
+
+    <br><br>
+
+    <label for="angka2">Angka Kedua:</label>
+    <input type="number" id="angka2">
+
+    <br><br>
+
+    <button onclick="hitung('+')">Penjumlahan</button>
+    <button onclick="hitung('-')">Pengurangan</button>
+    <button onclick="hitung('*')">Perkalian</button>
+    <button onclick="hitung('/')">Pembagian</button>
+
+    <p id="hasil"></p>
+
+    <script>
+        function hitung(operator) {
+            let angka1 = Number(document.getElementById("angka1").value);
+            let angka2 = Number(document.getElementById("angka2").value);
+            let hasil;
+
+            if (operator === "+") {
+                hasil = angka1 + angka2;
+            } else if (operator === "-") {
+                hasil = angka1 - angka2;
+            } else if (operator === "*") {
+                hasil = angka1 * angka2;
+            } else if (operator === "/") {
+                if (angka2 === 0) {
+                    hasil = "Tidak dapat membagi dengan nol";
+                } else {
+                    hasil = angka1 / angka2;
+                }
+            }
+
+            document.getElementById("hasil").innerHTML =
+                "Hasil: " + hasil;
+        }
+    </script>
+</body>
+</html>

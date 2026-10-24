@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Pengambil Keputusan Nilai</title>
+</head>
+<body>
+    <h1>Aplikasi Pengambil Keputusan Nilai</h1>
+
+    <label for="nilai">Masukkan Nilai:</label>
+    <input type="number" id="nilai" min="0" max="100">
+
+    <button onclick="cekNilai()">Cek Nilai</button>
+
+    <p id="hasil"></p>
+
+    <script>
+        function cekNilai() {
+            let nilai = Number(document.getElementById("nilai").value);
+            let grade;
+
+            if (nilai >= 0 && nilai <= 20) {
+                grade = "E";
+            } else if (nilai >= 21 && nilai <= 40) {
+                grade = "D";
+            } else if (nilai >= 41 && nilai <= 60) {
+                grade = "C";
+            } else if (nilai >= 61 && nilai <= 80) {
+                grade = "B";
+            } else if (nilai >= 81 && nilai <= 100) {
+                grade = "A";
+            } else {
+                grade = "Nilai tidak valid";
+            }
+
+            document.getElementById("hasil").innerHTML =
+                "Nilai: " + nilai + "<br>" +
+                "Grade: " + grade;
+        }
+    </script>
+
+</body>
+</html>
