@@ -1,56 +1,51 @@
 <!DOCTYPE html>
-<html>
+<!-- full copas dari tugas di modul4 -->
+<html lang="id">
 <head>
-    <title>Kalkulator Sederhana</title>
+    <meta charset="UTF-8">
+    <title>Kalkulator</title>
 </head>
 
 <body>
-    <h2>Kalkulator Sederhana</h2>
-    <form method="post">
-        <label>Angka Pertama:</label>
-        <input type="number" name="angka1" required>
-        <br><br>
-        <label>Operator:</label>
-        <select name="operator">
-            <option value="+">+</option>
-            <option value="-">-</option>
-            <option value="*">*</option>
-            <option value="/">/</option>
-        </select>
-        <br><br>
-        <label>Angka Kedua:</label>
-        <input type="number" name="angka2" required>
-        <br><br>
-        <input type="submit" name="hitung" value="Hitung">
-    </form>
-    <br>
-    <label>Hasil:</label>
-    <input type="text" value="<?php
-        if (isset($_POST['hitung'])) {
-            $angka1 = $_POST['angka1'];
-            $angka2 = $_POST['angka2'];
-            $operator = $_POST['operator'];
-            
-            if ($operator == "+") {
-                echo $angka1 + $angka2;
+    <h1>Kalkulator</h1>
 
-            } elseif ($operator == "-") {
-                echo $angka1 - $angka2;
+    <label for="angka1">Angka Pertama:</label>
+    <input type="number" id="angka1">
+    <br><br>
 
-            } elseif ($operator == "*") {
-                echo $angka1 * $angka2;
+    <label for="angka2">Angka Kedua:</label>
+    <input type="number" id="angka2">
+    <br><br>
 
-            } elseif ($operator == "/") {
+    <button onclick="hitung('+')">Penjumlahan</button>
+    <button onclick="hitung('-')">Pengurangan</button>
+    <button onclick="hitung('*')">Perkalian</button>
+    <button onclick="hitung('/')">Pembagian</button>
+    <p id="hasil"></p>
 
-                if ($angka2 != 0) {
-                    echo $angka1 / $angka2;
+    <script>
+        function hitung(operator) {
+            let angka1 = Number(document.getElementById("angka1").value);
+            let angka2 = Number(document.getElementById("angka2").value);
+            let hasil;
+
+            if (operator === "+") {
+                hasil = angka1 + angka2;
+            } else if (operator === "-") {
+                hasil = angka1 - angka2;
+            } else if (operator === "*") {
+                hasil = angka1 * angka2;
+            } else if (operator === "/") {
+                if (angka2 === 0) {
+                    hasil = "Tidak dapat membagi dengan nol";
                 } else {
-                    echo "Tidak dapat dibagi dengan 0";
+                    hasil = angka1 / angka2;
                 }
             }
+
+            document.getElementById("hasil").innerHTML =
+                "Hasil: " + hasil;
         }
-
-    ?>" readonly>
-
+    </script>
 </body>
 </html>
