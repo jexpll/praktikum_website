@@ -32,26 +32,45 @@ if (isset($_GET["edit"])) {
 $tampil_form = isset($_GET["tambah"]) || $edit;
 $result = mysqli_query($koneksi, "SELECT * FROM barang ORDER BY id");
 ?>
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>Data Barang</title></head><body>
-<h1>Data Barang</h1><a href="index.php">Index</a>
-<?php if (!$tampil_form): ?>
-<p><a href="barang.php?tambah=1">Tambah Barang</a></p>
-<table border="1" cellpadding="8"><tr><th>ID</th><th>Nama</th><th>Harga</th><th>Aksi</th></tr>
-<?php while ($r=mysqli_fetch_assoc($result)): ?><tr>
-<td><?= (int)$r["id"] ?></td><td><?= htmlspecialchars($r["nama"]) ?></td>
-<td>Rp <?= number_format((float)$r["harga"],0,',','.') ?></td>
-<td><a href="barang.php?edit=<?= (int)$r["id"] ?>">Edit</a> |
-<a href="barang.php?hapus=<?= (int)$r["id"] ?>" onclick="return confirm('Hapus barang?')">Hapus</a></td>
-</tr><?php endwhile; ?></table>
-<?php else: ?>
-<h2><?= $edit ? "Edit Barang" : "Tambah Barang" ?></h2>
-<form method="POST">
-<?php if ($edit): ?><input type="hidden" name="id" value="<?= (int)$edit["id"] ?>"><?php endif; ?>
-<p>Nama: <input name="nama" maxlength="100" value="<?= htmlspecialchars($edit["nama"] ?? "") ?>" required></p>
-<p>Harga: <input type="number" name="harga" min="0" step="0.01" value="<?= htmlspecialchars($edit["harga"] ?? "") ?>" required></p>
-<button type="submit"><?= $edit ? "Update" : "Tambah" ?></button>
-</form>
-<a href="barang.php">Kembali</a>
-<?php endif; ?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Barang</title>
+</head>
+<body>
+    <h1>Data Barang</h1>
+    <a href="index.php">Index</a>
+    <?php if (!$tampil_form): ?>
+    <p>
+        <a href="barang.php?tambah=1">Tambah Barang</a>
+    </p>
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>ID</th>
+            <th>Nama</th>
+            <th>Harga</th>
+            <th>Aksi</th>
+        </tr>
+        <?php while ($r=mysqli_fetch_assoc($result)): ?>
+        <tr>
+            <td><?= (int)$r["id"] ?></td><td><?= htmlspecialchars($r["nama"]) ?></td>
+            <td>Rp <?= number_format((float)$r["harga"],0,',','.') ?></td>
+            <td><a href="barang.php?edit=<?= (int)$r["id"] ?>">Edit</a> | <a href="barang.php?hapus=<?= (int)$r["id"] ?>" onclick="return confirm('Hapus barang?')">Hapus</a>
+            </td>
+        </tr><?php endwhile; ?>
+    </table>
+    <?php else: ?>
+    <h2><?= $edit ? "Edit Barang" : "Tambah Barang" ?></h2>
+    <form method="POST">
+        <?php if ($edit): ?>
+        <input type="hidden" name="id" value="<?= (int)$edit["id"] ?>">
+        <?php endif; ?>
+        <p>Nama: <input name="nama" maxlength="100" value="<?= htmlspecialchars($edit["nama"] ?? "") ?>" required></p>
+        <p>Harga: <input type="number" name="harga" min="0" step="0.01" value="<?= htmlspecialchars($edit["harga"] ?? "") ?>" required></p>
+        <button type="submit"><?= $edit ? "Update" : "Tambah" ?></button>
+    </form>
+    <a href="barang.php">Kembali</a>
+    <?php endif; ?>
 </body>
 </html>

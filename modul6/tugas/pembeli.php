@@ -32,19 +32,37 @@ if (isset($_GET["edit"])) {
 }
 $result = mysqli_query($koneksi, "SELECT * FROM pembeli ORDER BY id");
 ?>
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>Pembeli</title></head><body>
-<h1>Pembeli</h1><a href="index.php">Index</a>
-<form method="POST">
-<input type="hidden" name="id" value="<?= (int)($edit["id"] ?? 0) ?>">
-<p>Nama: <input name="nama" value="<?= htmlspecialchars($edit["nama"] ?? "") ?>" required></p>
-<p>Nomor HP: <input name="nomor_hp" value="<?= htmlspecialchars($edit["nomor_hp"] ?? "") ?>" required></p>
-<p>Alamat: <input name="alamat" value="<?= htmlspecialchars($edit["alamat"] ?? "") ?>" required></p>
-<button type="submit"><?= $edit ? "Update" : "Tambah" ?></button>
-</form>
-<table border="1" cellpadding="8"><tr><th>ID</th><th>Nama</th><th>Nomor HP</th><th>Alamat</th><th>Aksi</th></tr>
-<?php while ($r=mysqli_fetch_assoc($result)): ?><tr>
-<td><?= (int)$r["id"] ?></td><td><?= htmlspecialchars($r["nama"]) ?></td>
-<td><?= htmlspecialchars($r["nomor_hp"]) ?></td><td><?= htmlspecialchars($r["alamat"]) ?></td>
-<td><a href="?edit=<?= (int)$r["id"] ?>">Edit</a> | <a href="?hapus=<?= (int)$r["id"] ?>" onclick="return confirm('Hapus?')">Hapus</a></td>
-</tr><?php endwhile; ?></table>
-</body></html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Pembeli</title>
+</head>
+<body>
+    <h1>Pembeli</h1>
+    <a href="index.php">Index</a>
+    <form method="POST">
+        <input type="hidden" name="id" value="<?= (int)($edit["id"] ?? 0) ?>">
+        <p>Nama: <input name="nama" value="<?= htmlspecialchars($edit["nama"] ?? "") ?>" required></p>
+        <p>Nomor HP: <input name="nomor_hp" value="<?= htmlspecialchars($edit["nomor_hp"] ?? "") ?>" required></p>
+        <p>Alamat: <input name="alamat" value="<?= htmlspecialchars($edit["alamat"] ?? "") ?>" required></p>
+        <button type="submit"><?= $edit ? "Update" : "Tambah" ?></button>
+    </form>
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>ID</th>
+            <th>Nama</th>
+            <th>Nomor HP</th>
+            <th>Alamat</th>
+            <th>Aksi</th>
+        </tr>
+        <?php while ($r=mysqli_fetch_assoc($result)): ?>
+        <tr>
+            <td><?= (int)$r["id"] ?></td><td><?= htmlspecialchars($r["nama"]) ?></td>
+            <td><?= htmlspecialchars($r["nomor_hp"]) ?></td><td><?= htmlspecialchars($r["alamat"]) ?></td>
+            <td><a href="?edit=<?= (int)$r["id"] ?>">Edit</a> | <a href="?hapus=<?= (int)$r["id"] ?>" onclick="return confirm('Hapus?')">Hapus</a></td>
+        </tr>
+        <?php endwhile; ?>
+    </table>
+</body>
+</html>
